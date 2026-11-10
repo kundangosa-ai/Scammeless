@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Community Fraud Shield</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#scan" aria-label="Community Fraud Shield home">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 2.5 4.5 6v7.2c0 5.6 3.9 9.9 9.5 12.3 5.6-2.4 9.5-6.7 9.5-12.3V6L14 2.5Z" fill="var(--accent)"/><path d="m9.5 13.8 3.3 3.3 6-6.3" stroke="var(--accent-fg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Community Fraud Shield
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#scan">Scanner</a>
+      <a href="#patterns">Scam patterns</a>
+      <a href="#method">How it works</a>
+      <a href="#community">Community board</a>
+      <a href="#limits">Limits and roadmap</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="scan">
+    <div>
+      <div class="eyebrow">AI-assisted community fraud detection</div>
+      <h1>Paste a suspicious message. See exactly why it looks like fraud.</h1>
+      <p class="lede">Community Fraud Shield scores SMS, WhatsApp messages and links for the tricks scammers rely on, then lets neighbours warn each other about what is circulating.</p>
+      <div class="hero-meta">
+        <span class="tag">Mobile money</span><span class="tag">Fake jobs</span><span class="tag">Phishing links</span><span class="tag">Investment schemes</span>
+      </div>
+    </div>
+
+    <div class="scanner">
+      <div class="scan-head">
+        <strong>Message scanner</strong>
+        <span class="privacy">Runs in your browser. Nothing you paste is sent anywhere.</span>
+      </div>
+      <div class="scan-body">
+        <div class="field">
+          <label class="lbl" for="msg">Message to check</label>
+          <textarea id="msg" spellcheck="false" placeholder="Paste an SMS, WhatsApp message or email here"></textarea>
+        </div>
+        <div class="samples" role="group" aria-label="Example messages">
+          <span>Try an example:</span>
+          <button class="btn small" type="button" data-sample="0">Account suspended</button>
+          <button class="btn small" type="button" data-sample="1">Money sent by mistake</button>
+          <button class="btn small" type="button" data-sample="2">Job offer</button>
+          <button class="btn small" type="button" data-sample="3">Normal message</button>
+        </div>
+        <div class="row">
+          <button class="btn primary" id="scanBtn" type="button">Scan message</button>
+          <button class="btn" id="clearBtn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="result" id="result" aria-live="polite">
+        <div class="verdict">
+          <div class="gauge" id="gauge">
+            <svg viewBox="0 0 140 140" aria-hidden="true">
+              <circle class="track" cx="70" cy="70" r="58" fill="none" stroke-width="12"/>
+              <circle class="val" id="gval" cx="70" cy="70" r="58" fill="none" stroke-width="12" stroke-linecap="round" transform="rotate(-90 70 70)" stroke-dasharray="364.42" stroke-dashoffset="364.42"/>
+            </svg>
+            <div class="num"><b id="score">0</b><small>RISK / 100</small></div>
+          </div>
+          <div>
+            <span class="badge" id="badge">Low risk</span>
+            <h3 id="vtitle">Nothing to scan yet</h3>
+            <p id="vtext">Paste a message above.</p>
+          </div>
+        </div>
+        <div>
+          <div class="sub">Message with flagged phrases</div>
+          <div class="annotated" id="annotated"></div>
+        </div>
+        <div>
+          <div class="sub">Signals found</div>
+          <ul class="signals" id="signals"></ul>
+        </div>
+        <div class="advice" id="advice"></div>
+        <div class="row">
+          <button class="btn" id="reportBtn" type="button">Report this to the community board</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="patterns">
+    <div class="sec-head">
+      <div class="eyebrow">Pattern library</div>
+      <h2>Six scams the scanner is built around</h2>
+      <p>Each one follows a script. The detector looks for the parts of the script, so it can explain a score instead of just announcing one.</p>
+    </div>
+    <div class="patterns">
+      <article class="pattern">
+        <h3>Wrong-transfer reversal</h3>
+        <ul><li>"I sent money to your number by mistake"</li><li>Pressure to send it back quickly</li><li>A sad story about a hospital or an emergency</li></ul>
+        <p class="do"><b>What to do</b>Check your own balance and transaction history. Do not return money because of a text.</p>
+      </article>
+      <article class="pattern">
+        <h3>Account suspension and PIN theft</h3>
+        <ul><li>Claims your SIM, wallet or card is blocked</li><li>Asks for a PIN, OTP or password</li><li>Links to a look-alike website</li></ul>
+        <p class="do"><b>What to do</b>Providers do not ask for your PIN by message. Contact them through their official channels.</p>
+      </article>
+      <article class="pattern">
+        <h3>Fake jobs and fees</h3>
+        <ul><li>High pay for easy work from home</li><li>A "registration" or "processing" fee</li><li>Contact only through WhatsApp</li></ul>
+        <p class="do"><b>What to do</b>Real employers do not charge you to be hired. Verify the company independently.</p>
+      </article>
+      <article class="pattern">
+        <h3>Prize and promo claims</h3>
+        <ul><li>"Congratulations, you have won"</li><li>A competition you never entered</li><li>A small fee to release the prize</li></ul>
+        <p class="do"><b>What to do</b>If you did not enter, you did not win. Delete and move on.</p>
+      </article>
+      <article class="pattern">
+        <h3>Investment doubling</h3>
+        <ul><li>Guaranteed returns in days</li><li>Screenshots of other people "cashing out"</li><li>Pressure to bring in friends</li></ul>
+        <p class="do"><b>What to do</b>No legitimate investment guarantees profit. Ask whether the seller is licensed.</p>
+      </article>
+      <article class="pattern">
+        <h3>Authority impersonation</h3>
+        <ul><li>Threats of arrest or fines</li><li>Claims to be an agency, bank or officer</li><li>"Do not tell anyone about this"</li></ul>
+        <p class="do"><b>What to do</b>Hang up and call the organisation using a number you looked up yourself.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="method">
+    <div class="sec-head">
+      <div class="eyebrow">Method</div>
+      <h2>How a message becomes a score</h2>
+      <p>The current prototype is a transparent, rule-based model. Every point of the score traces back to a phrase you can see highlighted.</p>
+    </div>
+    <div class="flow">
+      <div class="step"><span class="n">STEP 1</span><h3>Input</h3><p>A pasted message. Processed locally, never stored.</p></div>
+      <div class="step"><span class="n">STEP 2</span><h3>Pattern matching</h3><p>Regular expressions find requests for PINs, fees, threats and urgency.</p></div>
+      <div class="step"><span class="n">STEP 3</span><h3>Link analysis</h3><p>Shortened links, risky domain endings and brand names inside odd addresses.</p></div>
+      <div class="step"><span class="n">STEP 4</span><h3>Risk scoring</h3><p>Signal weights combine so that several weak signs outweigh one.</p></div>
+      <div class="step"><span class="n">STEP 5</span><h3>Explanation</h3><p>Highlighted phrases, plain reasons and a recommended next step.</p></div>
+    </div>
+    <div class="formula"><code>risk = 100 × ( 1 − ∏ (1 − wᵢ) )   where wᵢ is the weight of each distinct signal found, between 0 and 1</code></div>
+  </section>
+
+  <section id="community">
+    <div class="sec-head">
+      <div class="eyebrow">Community board</div>
+      <h2>What neighbours are seeing</h2>
+      <p>Reports from the community are the data that will later train a statistical model. Phone numbers are masked automatically before a report is saved.</p>
+    </div>
+    <div class="community">
+      <div class="card">
+        <h3>Report a scam</h3>
+        <form class="form" id="repForm">
+          <div class="field">
+            <label class="lbl" for="rCat">Type of scam</label>
+            <select id="rCat"></select>
+          </div>
+          <div class="two">
+            <div class="field">
+              <label class="lbl" for="rCh">Where it arrived</label>
+              <select id="rCh"><option>SMS</option><option>WhatsApp</option><option>Phone call</option><option>Facebook</option><option>Email</option><option>In person</option></select>
+            </div>
+            <div class="field">
+              <label class="lbl" for="rArea">Area</label>
+              <input type="text" id="rArea" placeholder="e.g. Chalala" maxlength="40">
+            </div>
+          </div>
+          <div class="field">
+            <label class="lbl" for="rTxt">What happened</label>
+            <textarea id="rTxt" placeholder="Describe the message or call. Leave out names of individuals." maxlength="500"></textarea>
+            <span class="hint">Do not include real names or full phone numbers.</span>
+          </div>
+          <div class="row">
+            <button class="btn primary" type="submit">Submit report</button>
+            <span class="status" id="repStatus" role="status"></span>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Reports by type</h3>
+        <div class="bars" id="bars"></div>
+        <h3>Latest reports</h3>
+        <ul class="reports" id="reports"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="sec-head">
+      <div class="eyebrow">Limits and roadmap</div>
+      <h2>What this prototype does not claim</h2>
+      <p>A fraud tool that overstates itself becomes a fraud risk. These are the boundaries of the current build.</p>
+    </div>
+    <div class="limits">
+      <div class="card">
+        <h3>Known limitations</h3>
+        <ul>
+          <li>Rules catch known scripts. A new wording can score low, so a low score is never proof that a message is safe.</li>
+          <li>Legitimate messages that mention PINs or fees may score higher than they should.</li>
+          <li>Phrases are matched in English. Bemba, Nyanja and mixed-language messages need their own patterns.</li>
+          <li>The board is stored in your own browser for this demo. A real deployment needs a shared, moderated database.</li>
+          <li>Example reports on the board are illustrative and are not real incidents.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Roadmap</h3>
+        <div class="phases">
+          <div class="phase"><span class="when">PHASE 1</span><p><b>Working prototype</b>Explainable scanner and community board, as shown here.</p></div>
+          <div class="phase"><span class="when">PHASE 2</span><p><b>Labelled dataset and ML model</b>Collect consented reports, label them, train a classifier and measure precision and recall against the rule-based baseline.</p></div>
+          <div class="phase"><span class="when">PHASE 3</span><p><b>Moderation and integration</b>Admin review of reports, multilingual support and a path to share findings with network operators and banks.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Community Fraud Shield · Student project · ICU Chalala Campus</span>
+    <span>Prototype for demonstration. Not a substitute for advice from your bank or mobile operator.</span>
+  </footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
